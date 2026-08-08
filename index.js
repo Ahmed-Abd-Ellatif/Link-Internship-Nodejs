@@ -15,7 +15,11 @@ const port = process.env.PORT || 3000;
 
 // 1. CORS CONFIGURATION
 const corsOptions = {
-  origin: ["http://localhost:4200"],
+  origin: [
+    "http://localhost:4200",
+    "http://localhost:3000/docs/",
+    "https://link-internship-nodejs.vercel.app/docs/",
+  ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 200,
