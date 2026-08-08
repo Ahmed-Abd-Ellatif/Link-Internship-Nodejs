@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 
 const ApiError = require("./utils/apiError");
 const globalError = require("./middlewares/errorMiddleware");
-const swaggerUi = require("swagger-ui-express");
 const swaggerSpecs = require("./utils/swagger");
 
 const reviewRouter = require("./routes/reviewRoute");
@@ -37,7 +36,36 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 3. ROUTES
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+app.get("/docs/swagger.json", (req, res) => res.json(swaggerSpecs));
+app.get("/docs", (req, res) => {
+  const html = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Intern Node API - Swagger UI</title>
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5.32.12/swagger-ui.css" />
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist@5.32.12/swagger-ui-bundle.js"></script>
+    <script src="https://unpkg.com/swagger-ui-dist@5.32.12/swagger-ui-standalone-preset.js"></script>
+    <script>
+      window.onload = function () {
+        window.ui = SwaggerUIBundle({
+          url: "/docs/swagger.json",
+          dom_id: "#swagger-ui",
+          deepLinking: true,
+          presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+          plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+          layout: "StandaloneLayout",
+        });
+      };
+    </script>
+  </body>
+  </html>`;
+  res.send(html);
+});
 app.use("/api/Reviews", reviewRouter);
 app.use("/api/products", productRouter);
 
