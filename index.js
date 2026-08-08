@@ -16,10 +16,7 @@ const port = process.env.PORT || 3000;
 
 // 1. CORS CONFIGURATION
 const corsOptions = {
-  origin: [
-    "http://localhost:4200",
-    "https://final-project-anguler-link.vercel.app",
-  ],
+  origin: ["http://localhost:4200"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   optionsSuccessStatus: 200,
@@ -36,11 +33,11 @@ app.use(
       ),
   }),
 );
-app.use(express.json());
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 3. ROUTES
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 app.use("/api/Reviews", reviewRouter);
 app.use("/api/products", productRouter);
 

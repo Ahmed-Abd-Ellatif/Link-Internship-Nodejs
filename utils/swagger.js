@@ -11,6 +11,10 @@ const options = {
     },
     servers: [
       {
+        url: "https://link-internship-nodejs.vercel.app/api",
+        description: "Production server (Vercel)",
+      },
+      {
         url: "http://localhost:3000/api",
         description: "Local server",
       },
