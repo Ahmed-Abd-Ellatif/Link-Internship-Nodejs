@@ -1,0 +1,77 @@
+const swaggerJsdoc = require("swagger-jsdoc");
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Intern Node API",
+      version: "1.0.0",
+      description:
+        "REST API for Reviews and Products built with Express & Mongoose.",
+    },
+    servers: [
+      {
+        url: "http://localhost:3000/api",
+        description: "Local server",
+      },
+    ],
+    components: {
+      schemas: {
+        Review: {
+          type: "object",
+          required: ["userName", "description", "rating"],
+          properties: {
+            _id: { type: "string", example: "6a778962fd321bcc5517d540" },
+            userName: { type: "string", example: "Ahmed Abd Ellatif" },
+            description: { type: "string", example: "Great course!" },
+            rating: { type: "number", minimum: 1, maximum: 5, example: 4.5 },
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
+          },
+        },
+        Product: {
+          type: "object",
+          required: ["image", "title", "rate", "price"],
+          properties: {
+            _id: { type: "string", example: "6a778962fd321bcc5517d540" },
+            image: { type: "string", example: "https://example.com/image.png" },
+            title: { type: "string", example: "T-Shirt" },
+            rate: { type: "number", minimum: 0, maximum: 5, example: 4.5 },
+            price: { type: "number", minimum: 0, example: 200 },
+            discount: {
+              type: "number",
+              minimum: 0,
+              maximum: 100,
+              example: 20,
+            },
+            size: { type: "string", example: "x-large" },
+            color: { type: "string", example: "red" },
+            topSelling: { type: "boolean", example: true },
+            newArrival: { type: "boolean", example: false },
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
+          },
+        },
+        Error: {
+          type: "object",
+          properties: {
+            status: { type: "string", example: "fail" },
+            message: { type: "string", example: "Product not found" },
+          },
+        },
+        Pagination: {
+          type: "object",
+          properties: {
+            currentPage: { type: "number", example: 1 },
+            pageSize: { type: "number", example: 10 },
+            totalItems: { type: "number", example: 25 },
+            totalPages: { type: "number", example: 3 },
+          },
+        },
+      },
+    },
+  },
+  apis: ["./controllers/*.js"],
+};
+
+module.exports = swaggerJsdoc(options);
