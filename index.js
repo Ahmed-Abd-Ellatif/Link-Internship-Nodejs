@@ -33,7 +33,7 @@ app.use(
       ),
   }),
 );
-// app.use(express.json());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 3. ROUTES
@@ -48,17 +48,23 @@ app.all("/{*path}", (req, res, next) => {
 // 5. GLOBAL ERROR HANDLING MIDDLEWARE
 app.use(globalError);
 
-// 6. CONNECTING TO DATABASE & START SERVER
+// 6. CONNECTING TO DATABASE
 const url = process.env.DB_URL;
 
 mongoose
   .connect(url)
   .then(() => {
     console.log("Connected to the database");
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
   })
   .catch((error) => {
     console.error("Database connection error:", error);
   });
+
+// 7. START SERVER (skipped on Vercel serverless)
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
+
+module.exports = app;
