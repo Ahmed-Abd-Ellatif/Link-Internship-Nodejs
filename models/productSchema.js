@@ -3,9 +3,12 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
     image: {
-      type: String,
+      type: [String],
       required: [true, "Product image is required"],
-      trim: true,
+      validate: {
+        validator: (arr) => arr.length >= 1 && arr.length <= 3,
+        message: "Product must have between 1 and 3 images",
+      },
     },
     title: {
       type: String,

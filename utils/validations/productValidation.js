@@ -2,7 +2,17 @@ const { check, param } = require("express-validator");
 const validationMiddleware = require("../../middlewares/validationMiddleware");
 
 exports.createProductValidation = [
-  check("image").notEmpty().withMessage("Product image is required"),
+  check("image")
+    .notEmpty()
+    .withMessage("Product image is required")
+    .isArray({ min: 1, max: 3 })
+    .withMessage("Product must have between 1 and 3 images")
+    .custom(
+      (arr) =>
+        Array.isArray(arr) &&
+        arr.every((img) => typeof img === "string" && img.trim().length > 0),
+    )
+    .withMessage("Product images must be non-empty strings"),
 
   check("title").notEmpty().withMessage("Product title is required"),
 
@@ -54,7 +64,16 @@ exports.getProductValidation = [
 exports.updateProductValidation = [
   param("id").isMongoId().withMessage("Invalid Product ID format"),
 
-  check("image").optional(),
+  check("image")
+    .optional()
+    .isArray({ min: 1, max: 3 })
+    .withMessage("Product must have between 1 and 3 images")
+    .custom(
+      (arr) =>
+        Array.isArray(arr) &&
+        arr.every((img) => typeof img === "string" && img.trim().length > 0),
+    )
+    .withMessage("Product images must be non-empty strings"),
 
   check("title").optional(),
 

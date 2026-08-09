@@ -38,7 +38,13 @@ const options = {
           required: ["image", "title", "rate", "price"],
           properties: {
             _id: { type: "string", example: "6a778962fd321bcc5517d540" },
-            image: { type: "string", example: "https://example.com/image.png" },
+            image: {
+              type: "array",
+              items: { type: "string" },
+              minItems: 1,
+              maxItems: 3,
+              example: ["https://example.com/image1.png"],
+            },
             title: { type: "string", example: "T-Shirt" },
             rate: { type: "number", minimum: 0, maximum: 5, example: 4.5 },
             price: { type: "number", minimum: 0, example: 200 },
