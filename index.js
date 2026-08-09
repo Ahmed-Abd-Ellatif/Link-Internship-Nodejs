@@ -1,8 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 
+const connectDB = require("./utils/db");
 const ApiError = require("./utils/apiError");
 const globalError = require("./middlewares/errorMiddleware");
 const swaggerSpecs = require("./utils/swagger");
@@ -40,6 +40,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // 3. ROUTES
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.get("/docs/swagger.json", (req, res) => res.json(swaggerSpecs));
 app.get("/docs", (req, res) => {
   const html = `
@@ -80,19 +89,7 @@ app.all("/{*path}", (req, res, next) => {
 // 5. GLOBAL ERROR HANDLING MIDDLEWARE
 app.use(globalError);
 
-// 6. CONNECTING TO DATABASE
-const url = process.env.DB_URL;
-
-mongoose
-  .connect(url)
-  .then(() => {
-    console.log("Connected to the database");
-  })
-  .catch((error) => {
-    console.error("Database connection error:", error);
-  });
-
-// 7. START SERVER (skipped on Vercel serverless)
+// 6. START SERVER (skipped on Vercel serverless)
 if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
