@@ -10,6 +10,10 @@ const swaggerSpecs = require("./utils/swagger");
 const reviewRouter = require("./routes/reviewRoute");
 const productRouter = require("./routes/productRoute");
 const cartRouter = require("./routes/cartRoute");
+const g1ProductRouter = require("./routes/g1ProductRoute");
+const g1CartRouter = require("./routes/g1CartRoute");
+const g3ProductRouter = require("./routes/g3ProductRoute");
+const g3CartRouter = require("./routes/g3CartRoute");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -83,6 +87,10 @@ app.get("/docs", (req, res) => {
 app.use("/api/Reviews", reviewRouter);
 app.use("/api/products", productRouter);
 app.use("/api/cart", cartRouter);
+app.use("/api/g1/products", g1ProductRouter);
+app.use("/api/g1/cart", g1CartRouter);
+app.use("/api/g3/products", g3ProductRouter);
+app.use("/api/g3/cart", g3CartRouter);
 
 app.all("/{*path}", (req, res, next) => {
   next(new ApiError(`Can't find this route: ${req.originalUrl}`, 404));
