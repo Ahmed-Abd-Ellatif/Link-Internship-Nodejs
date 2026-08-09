@@ -78,6 +78,26 @@ const options = {
             totalPages: { type: "number", example: 3 },
           },
         },
+        Cart: {
+          type: "object",
+          required: ["items"],
+          properties: {
+            _id: { type: "string", example: "6a778962fd321bcc5517d540" },
+            items: {
+              type: "array",
+              items: {
+                type: "object",
+                properties: {
+                  _id: { type: "string", example: "6a778962fd321bcc5517d540" },
+                  product: { $ref: "#/components/schemas/Product" },
+                  quantity: { type: "number", minimum: 1, example: 2 },
+                },
+              },
+            },
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
+          },
+        },
       },
     },
   },
