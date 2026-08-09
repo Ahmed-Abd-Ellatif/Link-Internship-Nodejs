@@ -66,7 +66,7 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
     );
 
     if (existingItem) {
-      existingItem.quantity += quantity;
+      existingItem.quantity = quantity;
     } else {
       cart.items.push({ product, quantity });
     }
