@@ -50,11 +50,11 @@ const getPagination = (totalItems, page, limit) => {
  *       - in: query
  *         name: color
  *         schema: { type: string }
- *         description: Filter by color (e.g. red)
+ *         description: Filter by color (matches any color in the list, e.g. red)
  *       - in: query
  *         name: size
  *         schema: { type: string }
- *         description: Filter by size (e.g. x-large)
+ *         description: Filter by size (matches any size in the list, e.g. x-large)
  *       - in: query
  *         name: topSelling
  *         schema: { type: boolean }
@@ -90,11 +90,11 @@ exports.getAllG1Products = asyncHandler(async (req, res) => {
   }
 
   if (req.query.color) {
-    filter.color = req.query.color;
+    filter.color = { $in: [req.query.color] };
   }
 
   if (req.query.size) {
-    filter.size = req.query.size;
+    filter.size = { $in: [req.query.size] };
   }
 
   if (req.query.topSelling !== undefined) {
@@ -204,8 +204,8 @@ exports.getG1Product = asyncHandler(async (req, res, next) => {
  *               rate: { type: number, minimum: 0, maximum: 5 }
  *               price: { type: number, minimum: 0 }
  *               discount: { type: number, minimum: 0, maximum: 100 }
- *               size: { type: string }
- *               color: { type: string }
+ *               size: { type: array, items: { type: string } }
+ *               color: { type: array, items: { type: string } }
  *               topSelling: { type: boolean }
  *               newArrival: { type: boolean }
  *     responses:
@@ -259,8 +259,8 @@ exports.createG1Product = asyncHandler(async (req, res) => {
  *               rate: { type: number, minimum: 0, maximum: 5 }
  *               price: { type: number, minimum: 0 }
  *               discount: { type: number, minimum: 0, maximum: 100 }
- *               size: { type: string }
- *               color: { type: string }
+ *               size: { type: array, items: { type: string } }
+ *               color: { type: array, items: { type: string } }
  *               topSelling: { type: boolean }
  *               newArrival: { type: boolean }
  *     responses:

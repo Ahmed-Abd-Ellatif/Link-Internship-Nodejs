@@ -37,11 +37,11 @@ const productSchema = new mongoose.Schema(
       max: [100, "Discount cannot be more than 100"],
     },
     size: {
-      type: String,
+      type: [String],
       trim: true,
     },
     color: {
-      type: String,
+      type: [String],
       trim: true,
     },
     topSelling: {

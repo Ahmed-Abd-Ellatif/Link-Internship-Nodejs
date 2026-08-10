@@ -41,9 +41,27 @@ exports.createG1ProductValidation = [
     .isFloat({ min: 0, max: 100 })
     .withMessage("Discount must be between 0 and 100"),
 
-  check("size").optional(),
+  check("size")
+    .optional()
+    .isArray()
+    .withMessage("Product size must be an array")
+    .custom(
+      (arr) =>
+        Array.isArray(arr) &&
+        arr.every((item) => typeof item === "string" && item.trim().length > 0),
+    )
+    .withMessage("Product sizes must be non-empty strings"),
 
-  check("color").optional(),
+  check("color")
+    .optional()
+    .isArray()
+    .withMessage("Product color must be an array")
+    .custom(
+      (arr) =>
+        Array.isArray(arr) &&
+        arr.every((item) => typeof item === "string" && item.trim().length > 0),
+    )
+    .withMessage("Product colors must be non-empty strings"),
 
   check("topSelling")
     .optional()
@@ -102,9 +120,27 @@ exports.updateG1ProductValidation = [
     .isFloat({ min: 0, max: 100 })
     .withMessage("Discount must be between 0 and 100"),
 
-  check("size").optional(),
+  check("size")
+    .optional()
+    .isArray()
+    .withMessage("Product size must be an array")
+    .custom(
+      (arr) =>
+        Array.isArray(arr) &&
+        arr.every((item) => typeof item === "string" && item.trim().length > 0),
+    )
+    .withMessage("Product sizes must be non-empty strings"),
 
-  check("color").optional(),
+  check("color")
+    .optional()
+    .isArray()
+    .withMessage("Product color must be an array")
+    .custom(
+      (arr) =>
+        Array.isArray(arr) &&
+        arr.every((item) => typeof item === "string" && item.trim().length > 0),
+    )
+    .withMessage("Product colors must be non-empty strings"),
 
   check("topSelling")
     .optional()
