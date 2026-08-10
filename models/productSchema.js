@@ -6,13 +6,18 @@ const productSchema = new mongoose.Schema(
       type: [String],
       required: [true, "Product image is required"],
       validate: {
-        validator: (arr) => arr.length >= 1 && arr.length <= 3,
-        message: "Product must have between 1 and 3 images",
+        validator: (arr) => arr.length >= 1 && arr.length <= 4,
+        message: "Product must have between 1 and 4 images",
       },
     },
     title: {
       type: String,
       required: [true, "Product title is required"],
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: [true, "Product description is required"],
       trim: true,
     },
     rate: {

@@ -5,8 +5,8 @@ exports.createProductValidation = [
   check("image")
     .notEmpty()
     .withMessage("Product image is required")
-    .isArray({ min: 1, max: 3 })
-    .withMessage("Product must have between 1 and 3 images")
+    .isArray({ min: 1, max: 4 })
+    .withMessage("Product must have between 1 and 4 images")
     .custom(
       (arr) =>
         Array.isArray(arr) &&
@@ -15,6 +15,10 @@ exports.createProductValidation = [
     .withMessage("Product images must be non-empty strings"),
 
   check("title").notEmpty().withMessage("Product title is required"),
+
+  check("description")
+    .notEmpty()
+    .withMessage("Product description is required"),
 
   check("rate")
     .notEmpty()
@@ -66,8 +70,8 @@ exports.updateProductValidation = [
 
   check("image")
     .optional()
-    .isArray({ min: 1, max: 3 })
-    .withMessage("Product must have between 1 and 3 images")
+    .isArray({ min: 1, max: 4 })
+    .withMessage("Product must have between 1 and 4 images")
     .custom(
       (arr) =>
         Array.isArray(arr) &&
@@ -76,6 +80,8 @@ exports.updateProductValidation = [
     .withMessage("Product images must be non-empty strings"),
 
   check("title").optional(),
+
+  check("description").optional(),
 
   check("rate")
     .optional()

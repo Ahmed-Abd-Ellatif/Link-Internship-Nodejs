@@ -35,17 +35,18 @@ const options = {
         },
         Product: {
           type: "object",
-          required: ["image", "title", "rate", "price"],
+          required: ["image", "title", "rate", "price", "description"],
           properties: {
             _id: { type: "string", example: "6a778962fd321bcc5517d540" },
             image: {
               type: "array",
               items: { type: "string" },
               minItems: 1,
-              maxItems: 3,
+              maxItems: 4,
               example: ["https://example.com/image1.png"],
             },
             title: { type: "string", example: "T-Shirt" },
+            description: { type: "string", example: "A comfortable cotton t-shirt" },
             rate: { type: "number", minimum: 0, maximum: 5, example: 4.5 },
             price: { type: "number", minimum: 0, example: 200 },
             discount: {
@@ -71,7 +72,7 @@ const options = {
               type: "array",
               items: { type: "string" },
               minItems: 1,
-              maxItems: 3,
+              maxItems: 4,
               example: ["https://example.com/image1.png"],
             },
             title: { type: "string", example: "T-Shirt" },
@@ -121,7 +122,7 @@ const options = {
               type: "array",
               items: { type: "string" },
               minItems: 1,
-              maxItems: 3,
+              maxItems: 4,
               example: ["https://example.com/image1.png"],
             },
             title: { type: "string", example: "T-Shirt" },

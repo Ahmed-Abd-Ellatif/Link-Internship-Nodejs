@@ -193,10 +193,11 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
  *         application/json:
  *           schema:
  *             type: object
- *             required: [image, title, rate, price]
+ *             required: [image, title, rate, price, description]
  *             properties:
- *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 3 }
+ *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 4 }
  *               title: { type: string }
+ *               description: { type: string }
  *               rate: { type: number, minimum: 0, maximum: 5 }
  *               price: { type: number, minimum: 0 }
  *               discount: { type: number, minimum: 0, maximum: 100 }
@@ -249,8 +250,9 @@ exports.createProduct = asyncHandler(async (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 3 }
+ *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 4 }
  *               title: { type: string }
+ *               description: { type: string }
  *               rate: { type: number, minimum: 0, maximum: 5 }
  *               price: { type: number, minimum: 0 }
  *               discount: { type: number, minimum: 0, maximum: 100 }

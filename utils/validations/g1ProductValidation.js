@@ -5,8 +5,8 @@ exports.createG1ProductValidation = [
   check("image")
     .notEmpty()
     .withMessage("Product image is required")
-    .isArray({ min: 1, max: 3 })
-    .withMessage("Product must have between 1 and 3 images")
+    .isArray({ min: 1, max: 4 })
+    .withMessage("Product must have between 1 and 4 images")
     .custom(
       (arr) =>
         Array.isArray(arr) &&
@@ -68,8 +68,8 @@ exports.updateG1ProductValidation = [
 
   check("image")
     .optional()
-    .isArray({ min: 1, max: 3 })
-    .withMessage("Product must have between 1 and 3 images")
+    .isArray({ min: 1, max: 4 })
+    .withMessage("Product must have between 1 and 4 images")
     .custom(
       (arr) =>
         Array.isArray(arr) &&

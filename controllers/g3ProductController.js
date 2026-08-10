@@ -198,7 +198,7 @@ exports.getG3Product = asyncHandler(async (req, res, next) => {
  *             type: object
  *             required: [image, title, rate, price]
  *             properties:
- *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 3 }
+ *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 4 }
  *               title: { type: string }
  *               description: { type: string }
  *               rate: { type: number, minimum: 0, maximum: 5 }
@@ -253,7 +253,7 @@ exports.createG3Product = asyncHandler(async (req, res) => {
  *           schema:
  *             type: object
  *             properties:
- *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 3 }
+ *               image: { type: array, items: { type: string }, minItems: 1, maxItems: 4 }
  *               title: { type: string }
  *               description: { type: string }
  *               rate: { type: number, minimum: 0, maximum: 5 }
