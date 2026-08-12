@@ -46,7 +46,10 @@ const options = {
               example: ["https://example.com/image1.png"],
             },
             title: { type: "string", example: "T-Shirt" },
-            description: { type: "string", example: "A comfortable cotton t-shirt" },
+            description: {
+              type: "string",
+              example: "A comfortable cotton t-shirt",
+            },
             rate: { type: "number", minimum: 0, maximum: 5, example: 4.5 },
             price: { type: "number", minimum: 0, example: 200 },
             discount: {
@@ -84,7 +87,10 @@ const options = {
               example: ["https://example.com/image1.png"],
             },
             title: { type: "string", example: "T-Shirt" },
-            description: { type: "string", example: "A comfortable cotton t-shirt" },
+            description: {
+              type: "string",
+              example: "A comfortable cotton t-shirt",
+            },
             rate: { type: "number", minimum: 0, maximum: 5, example: 4.5 },
             price: { type: "number", minimum: 0, example: 200 },
             discount: {
@@ -144,7 +150,10 @@ const options = {
               example: ["https://example.com/image1.png"],
             },
             title: { type: "string", example: "T-Shirt" },
-            description: { type: "string", example: "A comfortable cotton t-shirt" },
+            description: {
+              type: "string",
+              example: "A comfortable cotton t-shirt",
+            },
             rate: { type: "number", minimum: 0, maximum: 5, example: 4.5 },
             price: { type: "number", minimum: 0, example: 200 },
             discount: {
