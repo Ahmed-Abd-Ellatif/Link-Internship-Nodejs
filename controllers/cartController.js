@@ -110,7 +110,7 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
  *                       items:
  *                         type: object
  *                         properties:
- *                           product: { $ref: '#/components/schemas/Product' }
+ *                           product: { $ref: '#/components/schemas/ProductInCart' }
  *                           quantity: { type: number }
  *                           size: { type: string }
  *                           color: { type: string }
@@ -131,13 +131,20 @@ exports.getCart = asyncHandler(async (req, res) => {
     });
   }
 
-  const items = cart.items.map((item) => ({
-    product: item.product,
-    quantity: item.quantity,
-    size: item.size,
-    color: item.color,
-    totalPrice: calculateItemTotal(item.product, item.quantity),
-  }));
+  const items = cart.items.map((item) => {
+    const prod = item.product && item.product.toObject ? item.product.toObject() : item.product;
+    // override product's size/color with selected values from cart item
+    prod.size = item.size;
+    prod.color = item.color;
+
+    return {
+      product: prod,
+      quantity: item.quantity,
+      size: item.size,
+      color: item.color,
+      totalPrice: calculateItemTotal(item.product, item.quantity),
+    };
+  });
 
   const totalPrice = +items
     .reduce((sum, item) => sum + item.totalPrice, 0)
