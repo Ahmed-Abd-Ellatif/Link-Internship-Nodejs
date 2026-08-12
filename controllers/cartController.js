@@ -22,10 +22,12 @@ const calculateItemTotal = (product, quantity) => {
  *         application/json:
  *           schema:
  *             type: object
- *             required: [product, quantity]
+ *             required: [product, quantity, size, color]
  *             properties:
  *               product: { type: string, description: Product id }
  *               quantity: { type: number, minimum: 1 }
+ *               size: { type: string, description: Selected size }
+ *               color: { type: string, description: Selected color }
  *     responses:
  *       201:
  *         description: Product added to cart successfully
@@ -110,6 +112,8 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
  *                         properties:
  *                           product: { $ref: '#/components/schemas/Product' }
  *                           quantity: { type: number }
+ *                           size: { type: string }
+ *                           color: { type: string }
  *                           totalPrice: { type: number }
  *                     totalPrice: { type: number }
  */
