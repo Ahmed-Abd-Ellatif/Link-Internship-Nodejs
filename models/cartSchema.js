@@ -14,6 +14,14 @@ const cartSchema = new mongoose.Schema(
           required: [true, "Quantity is required"],
           min: [1, "Quantity must be at least 1"],
         },
+        size: {
+          type: String,
+          required: [true, "Size is required"],
+        },
+        color: {
+          type: String,
+          required: [true, "Color is required"],
+        },
       },
     ],
   },

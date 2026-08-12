@@ -49,7 +49,7 @@ const calculateItemTotal = (product, quantity) => {
 // @route   POST /api/cart
 // @access  Public
 exports.addToCart = asyncHandler(async (req, res, next) => {
-  const { product, quantity } = req.body;
+  const { product, quantity, size, color } = req.body;
 
   const productExists = await Product.findById(product);
   if (!productExists) {
@@ -59,16 +59,19 @@ exports.addToCart = asyncHandler(async (req, res, next) => {
   let cart = await Cart.findOne();
 
   if (!cart) {
-    cart = await Cart.create({ items: [{ product, quantity }] });
+    cart = await Cart.create({ items: [{ product, quantity, size, color }] });
   } else {
     const existingItem = cart.items.find(
-      (item) => item.product.toString() === product,
+      (item) =>
+        item.product.toString() === product &&
+        item.size === size &&
+        item.color === color,
     );
 
     if (existingItem) {
       existingItem.quantity = quantity;
     } else {
-      cart.items.push({ product, quantity });
+      cart.items.push({ product, quantity, size, color });
     }
 
     await cart.save();
@@ -127,6 +130,8 @@ exports.getCart = asyncHandler(async (req, res) => {
   const items = cart.items.map((item) => ({
     product: item.product,
     quantity: item.quantity,
+    size: item.size,
+    color: item.color,
     totalPrice: calculateItemTotal(item.product, item.quantity),
   }));
 

@@ -14,6 +14,18 @@ exports.addToCartValidation = [
     .isInt({ min: 1 })
     .withMessage("Quantity must be at least 1"),
 
+  check("size")
+    .notEmpty()
+    .withMessage("Size is required")
+    .isString()
+    .withMessage("Size must be a string"),
+
+  check("color")
+    .notEmpty()
+    .withMessage("Color is required")
+    .isString()
+    .withMessage("Color must be a string"),
+
   validationMiddleware,
 ];
 
