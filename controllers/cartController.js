@@ -132,7 +132,10 @@ exports.getCart = asyncHandler(async (req, res) => {
   }
 
   const items = cart.items.map((item) => {
-    const prod = item.product && item.product.toObject ? item.product.toObject() : item.product;
+    const prod =
+      item.product && item.product.toObject
+        ? item.product.toObject()
+        : item.product;
     // override product's size/color with selected values from cart item
     prod.size = item.size;
     prod.color = item.color;
